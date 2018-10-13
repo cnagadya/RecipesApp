@@ -1,22 +1,20 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require("path");
+const webpack = require("webpack");
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './src/index.html',
-  filename: 'index.html',
-  inject: 'body'
-})
+  template: "./src/index.html",
+  filename: "index.html",
+  inject: "body"
+});
 
 module.exports = {
-  devtool: 'eval',
-  entry: [
-    './src/index.js'
-  ],
+  devtool: "eval",
+  entry: ["./src/index.js"],
   output: {
-    path: path.resolve('dist'),
-    filename: 'bundle.js',
-    publicPath : '/'
+    path: path.resolve("dist"),
+    filename: "bundle.js",
+    publicPath: "/"
   },
   module: {
     rules: [
@@ -24,13 +22,28 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env']
+            presets: ["@babel/preset-env"]
           }
         }
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader"
+          }
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader", "sass-loader"]
       }
     ]
+  },
+  devServer: {
+    historyApiFallback: true
   },
   plugins: [HtmlWebpackPluginConfig]
 };
