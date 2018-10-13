@@ -36,9 +36,22 @@
       }
     }
   }
+  .content-area {
+    padding-top: 40px;
+    height: 100vh;
+    overflow: scroll;
+    float: left;
+    width: calc(100% - 250px);
+    .ant-row {
+      padding-right: 8.3%;
+    }
+  }
   &.reduce-width {
     .side-menu {
       width: 90px;
+    }
+    .content-area {
+      width: calc(100% - 90px);
     }
   }
 }
