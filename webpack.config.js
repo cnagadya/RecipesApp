@@ -24,7 +24,8 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env"]
+            presets: ["@babel/preset-env"],
+            plugins: [["import", { libraryName: "antd", style: true }]]
           }
         }
       },
@@ -37,8 +38,18 @@ module.exports = {
         ]
       },
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader", "sass-loader"]
+        test: /\.(scss|less|css)$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader",
+          {
+            loader: "less-loader", 
+            options: {
+              javascriptEnabled: true
+            }
+          }
+        ]
       }
     ]
   },

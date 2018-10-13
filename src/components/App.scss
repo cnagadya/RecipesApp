@@ -1,0 +1,44 @@
+.main-container {
+  .side-menu {
+    width: 250px;
+    float: left;
+    position: relative;
+    background: #001529;
+    height: 100vh;
+    font-size: 1.3em;
+    .ant-menu-item {
+      line-height: 50px;
+      height: auto;
+      font-size: 1.5em;
+      padding: 10px 0 18px;
+      margin: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .ant-menu-inline-collapsed {
+      width: 90px;
+    }
+    .anticon {
+      margin-right: 15px;
+      position: relative;
+      top: 2px;
+      font-size: 1.5em;
+    }
+    .menu-toggle {
+      position: absolute;
+      bottom: 0;
+      text-align: center;
+      padding: 5px;
+      color: #aaa;
+      width: 100%;
+      border-top: 1px solid;
+      .anticon {
+        font-size: 2em;
+      }
+    }
+  }
+  &.reduce-width {
+    .side-menu {
+      width: 90px;
+    }
+  }
+}
