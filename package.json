@@ -4,8 +4,18 @@
   "description": "Thank you for your interest in NomNom. We don't like puzzles and tricky questions, so we based all tasks on real-life problems we had to solve when building NomNom.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start":  "concurrently \"./start-api.sh\" \"webpack-dev-server --open --mode=development\""
+    "test": "jest --watch",
+    "start": "concurrently \"./start-api.sh\" \"webpack-dev-server --open --mode=development\""
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "setupTestFrameworkScriptFile": "jest-enzyme",
+    "testEnvironment": "enzyme",
+    "moduleNameMapper": {
+      "^.+\\.(css|less|scss)$": "babel-jest"
+    }
   },
   "keywords": [
     "react",
@@ -16,10 +26,12 @@
   "repository": "https://github.com/cnagadya/RecipesApp.git",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.0.0-rc.1",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.0.0-rc.1",
     "@babel/preset-react": "^7.0.0",
-    "babel-core": "^6.26.3",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
@@ -27,11 +39,14 @@
     "enzyme-adapter-react-16": "^1.6.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
+    "jest-enzyme": "^7.0.0",
+    "regenerator-runtime": "^0.12.1",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
+    "@babel/runtime": "^7.1.2",
     "antd": "^3.10.1",
     "axios": "^0.18.0",
     "concurrently": "^4.0.1",
