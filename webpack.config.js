@@ -8,6 +8,12 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: "body"
 });
 
+const fs = require("fs");
+
+const lessToJs = require("less-vars-to-js");
+const themeVariables = lessToJs(
+  fs.readFileSync(path.join(__dirname, "./ant-theme-vars.less"), "utf8")
+);
 module.exports = {
   devtool: "eval",
   entry: ["./src/index.js"],
@@ -44,12 +50,18 @@ module.exports = {
           "css-loader",
           "sass-loader",
           {
-            loader: "less-loader", 
+            loader: "less-loader",
             options: {
               javascriptEnabled: true
             }
           }
         ]
+      },
+      {
+        test: /\.(jpg|png)$/,
+        use: {
+          loader: "file-loader"
+        }
       }
     ]
   },

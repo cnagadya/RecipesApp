@@ -38,26 +38,29 @@ class App extends Component {
           <div onClick={this.toggleMenu} className="menu-toggle">
             <Icon type={collapsedMenu ? "menu-unfold" : "menu-fold"} />
           </div>
-          <Menu mode="inline" theme="dark" inlineCollapsed={collapsedMenu}>
-            <Item key="home">
-              <NavLink to="/recipes">
-                <Icon type="home" theme="outlined" />
-                <span>Home</span>
-              </NavLink>
-            </Item>
-            <Item key="add">
-              <NavLink to="/recipes/add">
-                <Icon type="file-add" theme="outlined" />
-                <span>Add Recipe</span>
-              </NavLink>
-            </Item>
-          </Menu>
+
+          <Router>
+            <Menu mode="inline" theme="dark" inlineCollapsed={collapsedMenu}>
+              <Item key="home">
+                <NavLink to="/recipes">
+                  <Icon type="home" theme="outlined" />
+                  <span>Home</span>
+                </NavLink>
+              </Item>
+              <Item key="add">
+                <NavLink to="/recipes/add">
+                  <Icon type="file-add" theme="outlined" />
+                  <span>Add Recipe</span>
+                </NavLink>
+              </Item>
+            </Menu>
+          </Router>
         </div>
         <div className="content-area">
           <Router>
             <Switch>
               <Redirect exact from="/" to="/recipes" />
-              <Route exact path="/recipes" component={Recipes} />
+              <Route path="/recipes" component={Recipes} />
               <Route exact path="/recipes/add" component={AddRecipe} />
               <Route component={NotFound} />
             </Switch>
