@@ -38,7 +38,16 @@ class RecipeForm extends Component {
     };
     this.setState({ newRecipe });
   };
-  addRecipe = event => {};
+  addRecipe = event => {
+    event.preventDefault();
+    const { content, title } = this.state.newRecipe;
+    if (content === "" || title === "") {
+      alert("Title and Content are both required");
+      return;
+    }
+    this.props.postRecipe(JSON.parse(JSON.stringify(this.state.newRecipe)));
+    this.setState({ newRecipe: this.newRecipe });
+  };
 
   onDeleteClick = () => {
     const { deleteRecipe, closeDrawer } = this.props;

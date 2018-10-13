@@ -45,12 +45,12 @@ it("Handles actions of type UPDATE_RECIPE", () => {
 it("Handles actions of type GET_RECIPE", () => {
   const action = {
     type: actionTypes.GET_RECIPE,
-    payload: {
+    payload: [{
       content: "I really like bananas",
       title: "bananas",
       id: "e322b482-eabc-457e-ace6-750e9dfc42f4",
       created_at: "2018-10-10T15:20:41.076"
-    }
+    }]
   };
   const newState = recipesReducer(
     { recipes: sampleRecipies, recipe: {} },
