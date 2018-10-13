@@ -46,17 +46,21 @@ it("Handles actions of type GET_RECIPE", () => {
   const action = {
     type: actionTypes.GET_RECIPE,
     payload: {
-      id: sampleId
-    }
-  };
-  const newState = recipesReducer({ recipes: sampleRecipies }, action);
-  expect(newState).toEqual({
-    recipe: {
       content: "I really like bananas",
       title: "bananas",
       id: "e322b482-eabc-457e-ace6-750e9dfc42f4",
       created_at: "2018-10-10T15:20:41.076"
     }
+  };
+  const newState = recipesReducer(
+    { recipes: sampleRecipies, recipe: {} },
+    action
+  );
+  expect(newState.recipe).toEqual({
+    content: "I really like bananas",
+    title: "bananas",
+    id: "e322b482-eabc-457e-ace6-750e9dfc42f4",
+    created_at: "2018-10-10T15:20:41.076"
   });
 });
 
@@ -83,4 +87,3 @@ it("does not modify state when an invalid action type is passed", () => {
   const newState = recipesReducer({}, { type: "random action type" });
   expect(newState).toEqual({});
 });
-
