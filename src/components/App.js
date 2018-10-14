@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import { Menu, Icon } from "antd";
+import React, { Component } from "react";
+import { Menu, Icon, Drawer } from "antd";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -10,13 +10,15 @@ import {
 import classNames from "classnames";
 
 import AddRecipe from "./recipes/AddRecipe";
+import Form from "./form/Form";
 import NotFound from "./notFound/NotFound";
 import Recipes from "./recipes/Recipes";
 
 import "./App.scss";
 class App extends Component {
   state = {
-    collapsedMenu: false
+    collapsedMenu: false,
+    drawerOpen: false
   };
 
   toggleMenu = () => {
@@ -25,9 +27,21 @@ class App extends Component {
     }));
   };
 
+  showDrawer = () => {
+    this.setState({
+      drawerOpen: true
+    });
+  };
+
+  closeDrawer = () => {
+    this.setState({
+      drawerOpen: false
+    });
+  };
+
   render() {
     const Item = Menu.Item;
-    const { collapsedMenu } = this.state;
+    const { collapsedMenu, drawerOpen } = this.state;
     return (
       <div
         className={classNames("main-container", {
@@ -56,11 +70,28 @@ class App extends Component {
             </Menu>
           </Router>
         </div>
+        <Drawer
+          title="Manage Recipe"
+          placement="right"
+          width={400}
+          onClose={this.closeDrawer}
+          visible={drawerOpen}
+        >
+          <Form closeDrawer={this.closeDrawer}/>
+        </Drawer>
         <div className="content-area">
           <Router>
             <Switch>
               <Redirect exact from="/" to="/recipes" />
-              <Route path="/recipes" component={Recipes} />
+              <Route
+                path="/recipes"
+                render={() => (
+                  <Recipes
+                    showDrawer={this.showDrawer}
+                    closeDrawer={this.closeDrawer}
+                  />
+                )}
+              />
               <Route exact path="/recipes/add" component={AddRecipe} />
               <Route component={NotFound} />
             </Switch>

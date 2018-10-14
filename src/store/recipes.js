@@ -21,7 +21,7 @@ export const recipesReducer = (state = initialState, action) => {
     case GET_RECIPE:
       return {
         ...state,
-        recipe: action.payload
+        recipe: action.payload.find(recipe => recipe)
       };
     case DELETE_RECIPE:
       return {
@@ -48,7 +48,6 @@ export const recipesReducer = (state = initialState, action) => {
 
 export const getRecipes = () => async dispatch => {
   const response = await axios.post("http://localhost:8088/_find", {});
-  // axios.post("http://localhost:8088/_find", {}).then(response)
   return dispatch({
     type: GET_RECIPES,
     payload: response.data
@@ -56,9 +55,9 @@ export const getRecipes = () => async dispatch => {
 };
 
 export const getRecipe = id => async dispatch => {
+  console.log("get rec called", id);
+
   const response = await axios.post("http://localhost:8088/_find", { id });
-  // console.log("get========", response, id);
-  // debugger;
   dispatch({
     type: GET_RECIPE,
     payload: response.data

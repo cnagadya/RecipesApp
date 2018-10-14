@@ -14,3 +14,5 @@ export const sampleRecipies = [
 ];
 
 export const sampleId = "e322b482-eabc-457e-ace6-750e9dfc42f4";
+
+export const testFunction = () => true
