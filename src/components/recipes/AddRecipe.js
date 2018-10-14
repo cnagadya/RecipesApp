@@ -1,4 +1,11 @@
-import React from "react";
+import { Component } from "react";
 
-const AddRecipe = () => <div>Add Form</div>;
+class AddRecipe extends Component {
+  componentDidMount() {
+    this.props.showDrawer();
+  }
+  render() {
+    return null;
+  }
+}
 export default AddRecipe;

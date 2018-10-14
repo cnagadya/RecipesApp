@@ -7,7 +7,6 @@ import classNames from "classnames";
 import { getRecipes } from "../../store/recipes";
 import Recipe from "./Recipe";
 import "./Recipes.scss";
-
 import logo from "../../assets/logo.jpg";
 class Recipes extends Component {
   state = { loading: true };
@@ -18,10 +17,6 @@ class Recipes extends Component {
     const { recipes, showDrawer } = this.props;
     return (
       <Fragment>
-        <div className="logo-area">
-          Recipe
-          <img src={logo} alt="Recipe App Logo" className="logo" /> Haven
-        </div>
         <div
           className={classNames("spinner", {
             hidden: !this.state.loading
@@ -43,7 +38,7 @@ class Recipes extends Component {
         ) : (
           <Alert
             message="No recipes added yet"
-            description={<Button>Add a Recipe</Button>}
+            description={<Button onClick={showDrawer}>Add a Recipe</Button>}
             type="info"
             className="no-recipes"
           />
