@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Col, Icon } from "antd";
+import { Col } from "antd";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 
 import { getRecipe } from "../../store/recipes";
 class Recipe extends Component {
   showRecipeDetails = id => {
-    console.log(id)
     this.props.getRecipe(id).then(() => this.props.showDrawer());
   };
 
@@ -33,7 +32,7 @@ class Recipe extends Component {
 
 Recipe.propTypes = {
   recipe: PropTypes.object.isRequired,
-  getRecipe: PropTypes.func.isRequired
+  getRecipe: PropTypes.func
 };
 
 const mapDispatchToprops = dispatch =>

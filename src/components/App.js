@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import { Menu, Icon, Drawer } from "antd";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-  NavLink
-} from "react-router-dom";
+import { Redirect, Route, Switch, NavLink } from "react-router-dom";
 import classNames from "classnames";
 
 import AddRecipe from "./recipes/AddRecipe";
@@ -14,6 +8,7 @@ import Form from "./form/Form";
 import NotFound from "./notFound/NotFound";
 import Recipes from "./recipes/Recipes";
 
+import logo from "../assets/logo.jpg";
 import "./App.scss";
 class App extends Component {
   state = {
@@ -53,22 +48,20 @@ class App extends Component {
             <Icon type={collapsedMenu ? "menu-unfold" : "menu-fold"} />
           </div>
 
-          <Router>
-            <Menu mode="inline" theme="dark" inlineCollapsed={collapsedMenu}>
-              <Item key="home">
-                <NavLink to="/recipes">
-                  <Icon type="home" theme="outlined" />
-                  <span>Home</span>
-                </NavLink>
-              </Item>
-              <Item key="add">
-                <NavLink to="/recipes/add">
-                  <Icon type="file-add" theme="outlined" />
-                  <span>Add Recipe</span>
-                </NavLink>
-              </Item>
-            </Menu>
-          </Router>
+          <Menu mode="inline" theme="dark" inlineCollapsed={collapsedMenu}>
+            <Item key="home">
+              <NavLink to="/recipes">
+                <Icon type="home" theme="outlined" />
+                <span>Home</span>
+              </NavLink>
+            </Item>
+            <Item key="add">
+              <NavLink to="/recipes/add">
+                <Icon type="file-add" theme="outlined" />
+                <span>Add Recipe</span>
+              </NavLink>
+            </Item>
+          </Menu>
         </div>
         <Drawer
           title="Manage Recipe"
@@ -77,25 +70,31 @@ class App extends Component {
           onClose={this.closeDrawer}
           visible={drawerOpen}
         >
-          <Form closeDrawer={this.closeDrawer}/>
+          <Form closeDrawer={this.closeDrawer} />
         </Drawer>
         <div className="content-area">
-          <Router>
-            <Switch>
-              <Redirect exact from="/" to="/recipes" />
-              <Route
-                path="/recipes"
-                render={() => (
-                  <Recipes
-                    showDrawer={this.showDrawer}
-                    closeDrawer={this.closeDrawer}
-                  />
-                )}
-              />
-              <Route exact path="/recipes/add" component={AddRecipe} />
-              <Route component={NotFound} />
-            </Switch>
-          </Router>
+          <div className="logo-area">
+            Recipe
+            <img src={logo} alt="Recipe App Logo" className="logo" /> Haven
+          </div>
+          <Switch>
+            <Redirect exact from="/" to="/recipes" />
+            <Route
+              exact
+              path="/recipes"
+              render={() => (
+                <Recipes
+                  showDrawer={this.showDrawer}
+                  closeDrawer={this.closeDrawer}
+                />
+              )}
+            />
+            <Route
+              path="/recipes/add"
+              render={() => <AddRecipe showDrawer={this.showDrawer} />}
+            />
+            <Route component={NotFound} />
+          </Switch>
         </div>
       </div>
     );

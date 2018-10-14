@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 import { Button, Form, Input } from "antd";
@@ -45,8 +46,12 @@ class RecipeForm extends Component {
       alert("Title and Content are both required");
       return;
     }
-    this.props.postRecipe(JSON.parse(JSON.stringify(this.state.newRecipe)));
-    this.setState({ newRecipe: this.newRecipe });
+    this.props
+      .postRecipe(JSON.parse(JSON.stringify(this.state.newRecipe)))
+      .then(() => {
+        this.props.history.push("/recipes");
+        this.setState({ newRecipe: this.initialState });
+      });
   };
 
   onDeleteClick = () => {
@@ -117,7 +122,9 @@ const mapStateToProps = state => ({
 const mapDispatchToprops = dispatch =>
   bindActionCreators({ postRecipe, deleteRecipe }, dispatch);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToprops
-)(RecipeForm);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToprops
+  )(RecipeForm)
+);
