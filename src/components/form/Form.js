@@ -121,10 +121,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToprops = dispatch =>
   bindActionCreators({ postRecipe, deleteRecipe }, dispatch);
+const ConnectedRecipeForm = connect(
+  mapStateToProps,
+  mapDispatchToprops
+)(RecipeForm);
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToprops
-  )(RecipeForm)
-);
+export {ConnectedRecipeForm}
+
+export default withRouter(ConnectedRecipeForm);
