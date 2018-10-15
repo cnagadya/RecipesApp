@@ -2,7 +2,7 @@ import React from "react";
 import { mount } from "enzyme";
 import { Form } from "antd";
 
-import RecipeForm from "./Form";
+import {ConnectedRecipeForm} from "./Form";
 import Provider from "../../store/provider";
 import { sampleRecipies, testFunction } from "../../assets/testData";
 
@@ -16,7 +16,7 @@ beforeEach(() => {
   };
   component = mount(
     <Provider initialState={initialState}>
-      <RecipeForm closeDrawer={testFunction} />
+      <ConnectedRecipeForm closeDrawer={testFunction} />
     </Provider>
   );
 });

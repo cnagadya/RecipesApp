@@ -1,11 +1,12 @@
 {
   "name": "frontend",
   "version": "1.0.0",
-  "description": "Thank you for your interest in NomNom. We don't like puzzles and tricky questions, so we based all tasks on real-life problems we had to solve when building NomNom.",
+  "description": "A simple recipe app",
   "main": "index.js",
   "scripts": {
     "test": "jest --watch",
-    "start": "concurrently \"./start-api.sh\" \"webpack-dev-server --open --mode=development\""
+    "start": "concurrently \"./start-api.sh\" \"webpack-dev-server --open --mode=development\"",
+    "startup": "webpack-dev-server"
   },
   "jest": {
     "transform": {
